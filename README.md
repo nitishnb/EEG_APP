@@ -2,6 +2,13 @@
 
 Stress Detection Application
 
+## To Run the Flutter App on you Local
+
+Clone this repository(project) on your local, open project on VS code or Android Studio, run the below command
+```
+flutter run
+```
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
