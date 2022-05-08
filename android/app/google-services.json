@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "30637654482",
+    "project_id": "stressdetection-8da11",
+    "storage_bucket": "stressdetection-8da11.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30637654482:android:fa79ef77270f074ec0080b",
+        "android_client_info": {
+          "package_name": "com.bmsce.stress_detection_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30637654482-pblrm62i0rm6j40nvnj96fa4bcg58apq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpHxNgeS0KVyERd17tuFBFw1QWQPmI-ME"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30637654482-pblrm62i0rm6j40nvnj96fa4bcg58apq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
