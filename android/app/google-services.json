@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "30637654482-nfeuqhhfvq56f3epsu311tln70dsn4t3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bmsce.stress_detection_app",
+            "certificate_hash": "da5a9235393aded1ad1b6738f743a2801fb8f0cc"
+          }
+        },
+        {
           "client_id": "30637654482-pblrm62i0rm6j40nvnj96fa4bcg58apq.apps.googleusercontent.com",
           "client_type": 3
         }

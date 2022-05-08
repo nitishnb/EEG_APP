@@ -10,12 +10,17 @@ class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user obj based on firebase user
-  User _userFromFirebaseUser(FirebaseUser user) {
-    return  User(uid: user.uid);
+  User? _userFromFirebaseUser(FirebaseUser user) {
+    // ignore: unnecessary_null_comparison
+    if (user != null) {
+      return User(uid: user.uid);
+    } else {
+      return null;
+    }
   }
 
   //auth change user stream
-  Stream<User> get user{
+  Stream<User?> get user{
     return _auth.onAuthStateChanged
     //.map((FirebaseUser user) => _userFromFirebaseUser(user));
         .map(_userFromFirebaseUser);
@@ -95,11 +100,12 @@ class AuthService {
 
     AuthResult authResult = await _auth.signInWithCredential(credential);
     FirebaseUser user = authResult.user;
-
+    print("The user is "+ user.toString());
     return _userFromFirebaseUser(user);
   }
 
   void signOutGoogle() async{
+    print("The user is "+ user.toString());
     await googleSignIn.signOut();
 
     print("User Sign Out");

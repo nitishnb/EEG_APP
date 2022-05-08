@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stress_detection_app/services/auth.dart';
 
 class Home extends StatelessWidget {
   // This widget is the root of your application.
@@ -48,6 +49,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -84,6 +87,37 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text(
               'Welcome',
+            ),
+            RaisedButton(
+              splashColor: Colors.black,
+              textColor: Colors.white,
+              color: Colors.white,
+              onPressed: () async {
+                _auth.signOut();
+                _auth.signOutGoogle();
+              },
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 10,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Log Out',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.green[800],
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ],
         ),

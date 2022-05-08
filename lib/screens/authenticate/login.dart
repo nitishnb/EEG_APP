@@ -141,7 +141,9 @@ class _State extends State<LoginPage> {
                     textColor: Colors.white,
                     color: Colors.white,
                     onPressed: () async {
-                      _auth.signInWithGoogle().whenComplete(() => Navigator.push(context, MaterialPageRoute(builder: (context) => Home())));
+                      _auth.signInWithGoogle().whenComplete(() => {
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => Home()))
+                      });
                       setState(() {
                         loading = true;
                       });
