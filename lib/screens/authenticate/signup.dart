@@ -20,8 +20,8 @@ class _State extends State<SignupPage> {
 
   //text field state
   String email = '';
-  String name = '';
-  String phoneNumber = '';
+  // String name = '';
+  // String phoneNumber = '';
   String password = '';
   String confirmPassword = '';
   String error = '';
@@ -78,40 +78,40 @@ class _State extends State<SignupPage> {
                         }
                     ),
                   ),
-                  SizedBox(height: 20.0),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                        fillColor: Colors.lightGreen[200],
-                        filled: true,
-                        labelText: 'Name :',
-                        labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
-                      ),
-                      validator: (val) => val!.length < 1 ? 'Enter name' : null,
-                      onChanged: (val){
-                        setState(() => name = val);
-                      },
-                    ),
-                  ),
-                  SizedBox(height: 20.0),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                        fillColor: Colors.lightGreen[200],
-                        filled: true,
-                        labelText: 'Phone Number :',
-                        labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
-                      ),
-                      validator: (val) => val!.length == 10 ? null : 'Enter 10 digit phone number' ,
-                      onChanged: (val){
-                        setState(() => phoneNumber = val);
-                      },
-                    ),
-                  ),
+                  // SizedBox(height: 20.0),
+                  // Container(
+                  //   padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
+                  //   child: TextFormField(
+                  //     decoration: InputDecoration(
+                  //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
+                  //       fillColor: Colors.lightGreen[200],
+                  //       filled: true,
+                  //       labelText: 'Name :',
+                  //       labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
+                  //     ),
+                  //     validator: (val) => val!.length < 1 ? 'Enter name' : null,
+                  //     onChanged: (val){
+                  //       setState(() => name = val);
+                  //     },
+                  //   ),
+                  // ),
+                  // SizedBox(height: 20.0),
+                  // Container(
+                  //   padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
+                  //   child: TextFormField(
+                  //     decoration: InputDecoration(
+                  //       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
+                  //       fillColor: Colors.lightGreen[200],
+                  //       filled: true,
+                  //       labelText: 'Phone Number :',
+                  //       labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
+                  //     ),
+                  //     validator: (val) => val!.length == 10 ? null : 'Enter 10 digit phone number' ,
+                  //     onChanged: (val){
+                  //       setState(() => phoneNumber = val);
+                  //     },
+                  //   ),
+                  // ),
                   SizedBox(height: 20.0),
                   Container(
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
@@ -162,7 +162,7 @@ class _State extends State<SignupPage> {
                           if (_formKey.currentState!.validate()){
                             setState(() => loading = true);
                             if(password == confirmPassword){
-                              dynamic result = await _auth.registerWithEmailAndPassword(email, password, name, phoneNumber);
+                              dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                               if(result == null){
                                 setState(() {
                                   error = 'Please supply a valid email';

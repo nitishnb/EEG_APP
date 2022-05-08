@@ -47,13 +47,13 @@ class AuthService {
 
 
   // register with email and password
-  Future registerWithEmailAndPassword (String email, String password, String name, String phoneNumber) async {
+  Future registerWithEmailAndPassword (String email, String password) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
 
       // create a new document for the user with uid
-      await DatabaseService(uid: user.uid).updateUserData(name, phoneNumber, email, '', '', []);
+      // await DatabaseService(uid: user.uid).updateUserData(name, phoneNumber, email, '', '', []);
       return _userFromFirebaseUser(user);
     } catch(e){
       print(e.toString());
@@ -95,10 +95,6 @@ class AuthService {
 
     AuthResult authResult = await _auth.signInWithCredential(credential);
     FirebaseUser user = authResult.user;
-
-
-    await DatabaseService(uid : user.uid).updateUserData(user.displayName, user.phoneNumber, user.email, user.phoneNumber, user.photoUrl, []);
-    print('This is uid : ${user.uid}');
 
     return _userFromFirebaseUser(user);
   }
