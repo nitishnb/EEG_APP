@@ -142,7 +142,7 @@ class _State extends State<LoginPage> {
                     color: Colors.white,
                     onPressed: () async {
                       _auth.signInWithGoogle().whenComplete(() => {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => Home()))
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyHomePage(title: "Stress Detection App")))
                       });
                       setState(() {
                         loading = true;

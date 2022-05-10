@@ -9,12 +9,13 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
     // return either home or authenticate widget
+    // ignore: unnecessary_null_comparison
     if(user == null){
       print(user);
       return Authenticate();
     } else {
-      print(user.uid);
-      return Home();
+      print(user.toString());
+      return MyHomePage(title: "Stress Detection App");
     }
   }
 }

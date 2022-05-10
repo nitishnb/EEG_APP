@@ -10,40 +10,31 @@ class DatabaseService {
 
   // collection reference
   final CollectionReference accountCollection = Firestore.instance.collection(
-      'account');
+      'userInfo');
 
-  Future<void> updateUserData(String name, String phoneNumber, String email, String address, String profile_pic, List cart) async {
+  Future<void> updateUserData(String name, String emailid, String profilePic) async {
     return await accountCollection.document(uid).setData({
       'name': name,
-      'phoneNumber': phoneNumber,
-      'email': email,
-      'address': address == '' ? null : address,
-      'profile_pic': profile_pic,
-      'cart' : cart,
+      'emailid': emailid,
+      'profilePic': profilePic
     });
   }
 
   // userData from snapshot
   Info _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    print('This is ${snapshot.data['cart']}');
     return Info(
         uid: uid,
         name: snapshot.data['name'],
-        email: snapshot.data['email'],
-        phoneNumber: snapshot.data['phoneNumber'],
-        address: snapshot.data['address'],
-        cart: snapshot.data['cart'],
-        profile_pic: snapshot.data['profile_pic'],
+        emailid: snapshot.data['emailid'],
+        profilePic: snapshot.data['profilePic'],
     );
   }
-
 
   // get user doc stream
   Stream<Info> get userData {
     return accountCollection.document(uid).snapshots()
         .map(_userDataFromSnapshot);
   }
-
 
   Future getAccountList(String id) async {
     DocumentSnapshot variable = await accountCollection.document(id).get();

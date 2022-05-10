@@ -1,34 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stress_detection_app/screens/home/NavBar.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:stress_detection_app/services/auth.dart';
-
-class Home extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stress Detection Application',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Home Page'),
-    );
-  }
-
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -50,6 +23,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final AuthService _auth = AuthService();
+  TooltipBehavior? _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,68 +40,59 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Welcome',
-            ),
-            RaisedButton(
-              splashColor: Colors.black,
-              textColor: Colors.white,
-              color: Colors.white,
-              onPressed: () async {
-                _auth.signOut();
-                _auth.signOutGoogle();
-              },
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-              highlightElevation: 10,
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Text(
-                        'Log Out',
-                        style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.green[800],
-                            fontWeight: FontWeight.bold
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+        drawer: NavBar(),
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: SafeArea(
+          child: Center(
+            child: Container(
+              // Center is a layout widget. It takes a single child and positions it
+              // in the middle of the parent.
+              // height of the Container widget
+              height: 450,
+              // width of the Container widget
+              child: SfCartesianChart(
+                primaryXAxis: DateTimeAxis(),
+
+                // Enable legend
+                legend:
+                Legend(isVisible: true,  position: LegendPosition.bottom),
+                // Chart title
+                title: ChartTitle(text: 'Stress Level over Past Week'),
+
+                // Enable tooltip
+                tooltipBehavior: _tooltipBehavior,
+
+                series: <LineSeries<ChartData, DateTime>>[
+                  LineSeries<ChartData, DateTime>(
+                      // Bind data source
+                      dataSource: <ChartData>[
+                        ChartData(DateTime(2022, 5, 7), 9),
+                        ChartData(DateTime(2022, 5, 8), 8),
+                        ChartData(DateTime(2022, 5, 9), 9),
+                        ChartData(DateTime(2022, 5, 10), 6),
+                        ChartData(DateTime(2022, 5, 11), 5),
+                        ChartData(DateTime(2022, 5, 12), 7),
+                        ChartData(DateTime(2022, 5, 13), 6),
+                      ],
+                      xValueMapper: (ChartData data, _) => data.year,
+                      yValueMapper: (ChartData data, _) => data.sales,
+                      dataLabelSettings: DataLabelSettings(isVisible: true))
+                ],
               ),
             ),
-          ],
-        ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+          ),
+        ) // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
+}
+
+class ChartData {
+  ChartData(this.year, this.sales);
+
+  final DateTime year;
+  final double sales;
 }
