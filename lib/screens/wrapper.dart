@@ -15,7 +15,7 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     } else {
       print(user.toString());
-      return MyHomePage(title: "Stress Detection App");
+      return MyHomePage();
     }
   }
 }
