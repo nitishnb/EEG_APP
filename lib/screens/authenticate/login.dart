@@ -34,7 +34,7 @@ class _State extends State<LoginPage> {
         backgroundColor: Colors.lightGreen,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('GreenKey',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.lightGreen),),
+          title: Text('Reliever',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.lightGreen),),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
         ),
@@ -142,7 +142,7 @@ class _State extends State<LoginPage> {
                     color: Colors.white,
                     onPressed: () async {
                       _auth.signInWithGoogle().whenComplete(() => {
-                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyHomePage(title: "Stress Detection App")))
+                        Navigator.push(context, MaterialPageRoute(builder:(context) => MyHomePage()))
                       });
                       setState(() {
                         loading = true;
