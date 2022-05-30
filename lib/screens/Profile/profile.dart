@@ -32,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     return ListView(
                       physics: BouncingScrollPhysics(),
                       children: [
-                        const SizedBox(height: 100),
+                        const SizedBox(height: 35),
                         ProfileWidget(
                           imagePath: userData!.profilePic,
                           onClicked: () {
@@ -44,11 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         const SizedBox(height: 24),
                         buildName(userData),
-                        const SizedBox(height: 48),
-                        NumbersWidget(userData),
-                        const SizedBox(height: 48),
-                        Center(child: buildUpgradeButton()),
                         const SizedBox(height: 24),
+                        NumbersWidget(userData),
+                        const SizedBox(height: 24),
+                        Center(child: buildUpgradeButton()),
+                        const SizedBox(height: 102),
+                        Image.network('https://api.parashospitals.com/uploads/2017/10/BMI.png'),
                         // buildAbout(user),
                       ],
                     );
