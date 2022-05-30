@@ -31,10 +31,10 @@ class _State extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.blue,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('Reliever',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.lightGreen),),
+          title: Text('Reliever',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.blue),),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
         ),
@@ -44,32 +44,22 @@ class _State extends State<LoginPage> {
                 key: _formKey,
                 child: ListView(
                 children: <Widget>[
+                  SizedBox(height: 40.0),
                   Icon(
-                    Icons.account_box,
+                    Icons.bubble_chart,
                     size: 140,
                     color: Colors.white,
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 0,bottom: 30),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'fonts/IndieFlower-Regular.ttf',
-                            fontSize: 50),
-                      )),
+                  SizedBox(height: 40.0),
                   Container(
                     padding: EdgeInsets.all(10),
                     child: TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                          fillColor: Colors.lightGreen[200],
+                          fillColor: Colors.lightBlue[200],
                           filled: true,
                           labelText: 'User Name/ Email',
-                          labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
+                          labelStyle: TextStyle(color: Colors.grey[800],fontWeight: FontWeight.bold),
                         ),
                         validator: (val) => val!.isEmpty ? 'Enter an email' : null,
                         onChanged: (val){
@@ -83,10 +73,10 @@ class _State extends State<LoginPage> {
                       obscureText: true,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                        fillColor: Colors.lightGreen[200],
+                        fillColor: Colors.lightBlue[200],
                         filled: true,
                         labelText: 'Password',
-                        labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
+                        labelStyle: TextStyle(color: Colors.grey[800],fontWeight: FontWeight.bold),
                       ),
                       validator: (val) => val!.length <6 ? 'Enter a password 6+ chars long' : null,
                       onChanged: (val){
@@ -99,7 +89,7 @@ class _State extends State<LoginPage> {
                       height: 50,
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: RaisedButton(
-                        textColor: Colors.lightGreen,
+                        textColor: Colors.lightBlue,
                         color: Colors.white,
                         child: Text('Login',style: TextStyle(fontSize: 24),),
                         onPressed: () async {
@@ -163,7 +153,7 @@ class _State extends State<LoginPage> {
                               'Sign in with Google',
                               style: TextStyle(
                                   fontSize: 18,
-                                  color: Colors.green[800],
+                                  color: Colors.blue[800],
                                   fontWeight: FontWeight.bold
                               ),
                             ),

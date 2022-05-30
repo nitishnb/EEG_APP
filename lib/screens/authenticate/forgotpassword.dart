@@ -21,10 +21,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   @override
   Widget build(BuildContext context) {
     return loading ? Loading() : Scaffold(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Colors.lightBlue,
         appBar: AppBar(
           centerTitle: true,
-          title: Text('GreenKey',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.lightGreen),),
+          title: Text('Reliever',textAlign: TextAlign.center,style: TextStyle(fontSize: 32,color: Colors.lightBlue),),
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
         ),
@@ -40,7 +40,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     child: TextFormField(
                         decoration: InputDecoration(
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-                          fillColor: Colors.lightGreen[200],
+                          fillColor: Colors.lightBlue[200],
                           filled: true,
                           labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
@@ -56,7 +56,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       height: 50,
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: RaisedButton(
-                        textColor: Colors.lightGreen,
+                        textColor: Colors.lightBlue,
                         color: Colors.white,
                         child: Text('Reset',style: TextStyle(fontSize: 24),),
                         onPressed: () async {
@@ -89,7 +89,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   ),
                   Text(
                     error,
-                    style: TextStyle(color: Colors.green[900], fontSize: 14.0),
+                    style: TextStyle(color: Colors.blue[900], fontSize: 14.0),
                   ),
                 ],
             )

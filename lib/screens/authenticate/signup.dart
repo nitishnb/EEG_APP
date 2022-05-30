@@ -35,9 +35,9 @@ class _State extends State<SignupPage> {
     return loading ? Loading() : Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('GreenKey',textAlign: TextAlign.center,style: TextStyle(fontSize: 32),),
+          title: Text('Reliever',textAlign: TextAlign.center,style: TextStyle(fontSize: 32),),
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.lightGreen,
+          backgroundColor: Colors.lightBlue,
         ),
         body: Padding(
             padding: EdgeInsets.all(10),
@@ -45,31 +45,21 @@ class _State extends State<SignupPage> {
                 key: _formKey,
                 child: ListView(
                 children: <Widget>[
+                  SizedBox(height: 40.0),
                   Icon(
-                    Icons.assignment_ind,
+                    Icons.bubble_chart,
                     size: 140,
-                    color: Colors.lightGreen,
+                    color: Colors.lightBlue,
                   ),
-                  Container(
-                      margin: EdgeInsets.only(top: 0,bottom: 30),
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(10),
-                      child: Text(
-                        'SIGN UP',
-                        style: TextStyle(
-                            color: Colors.lightGreen,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'fonts/IndieFlower-Regular.ttf',
-                            fontSize: 50),
-                      )),
+                  SizedBox(height: 40.0),
                   Container(
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
                     child: TextFormField(
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                          fillColor: Colors.lightGreen[200],
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightBlue)),
+                          fillColor: Colors.lightBlue[200],
                           filled: true,
-                          labelText: 'Email :',
+                          labelText: 'Email',
                           labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
                         ),
                         validator: (val) => val!.isEmpty ? 'Enter an email' : null,
@@ -83,10 +73,10 @@ class _State extends State<SignupPage> {
                     padding: EdgeInsets.fromLTRB(10, 0, 10, 2),
                     child: TextFormField(
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                        fillColor: Colors.lightGreen[200],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightBlue)),
+                        fillColor: Colors.lightBlue[200],
                         filled: true,
-                        labelText: 'Name :',
+                        labelText: 'Name',
                         labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
                       ),
                       validator: (val) => val!.length < 1 ? 'Enter name' : null,
@@ -118,10 +108,10 @@ class _State extends State<SignupPage> {
                     child: TextFormField(
                       obscureText: true,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                        fillColor: Colors.lightGreen[200],
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightBlue)),
+                        fillColor: Colors.lightBlue[200],
                         filled: true,
-                        labelText: 'Password :',
+                        labelText: 'Password',
                         labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
                       ),
                       validator: (val) => val!.length <6 ? 'Enter a password 6+ chars long' : null,
@@ -136,10 +126,10 @@ class _State extends State<SignupPage> {
                    child: TextFormField(
                      obscureText: true,
                      decoration: InputDecoration(
-                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightGreen)),
-                       fillColor: Colors.lightGreen[200],
+                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0),borderSide: BorderSide(color: Colors.lightBlue)),
+                       fillColor: Colors.lightBlue[200],
                        filled: true,
-                       labelText: ' Confirm Password :',
+                       labelText: ' Confirm Password',
                        labelStyle: TextStyle(color: Colors.grey[600],fontWeight: FontWeight.bold),
                      ),
                      validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
@@ -156,8 +146,8 @@ class _State extends State<SignupPage> {
                       padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                       child: RaisedButton(
                         textColor: Colors.white,
-                        color: Colors.lightGreen,
-                        child: Text('SignUP',style: TextStyle(fontSize: 24),),
+                        color: Colors.lightBlue,
+                        child: Text('Sign up',style: TextStyle(fontSize: 24),),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()){
                             setState(() => loading = true);
@@ -184,15 +174,16 @@ class _State extends State<SignupPage> {
                     error,
                     style: TextStyle(color: Colors.red, fontSize: 14.0),
                   ),
+                  SizedBox(height: 6.0),
                   Container(
                       child: Row(
                         children: <Widget>[
                           Text('Have an existing account?'),
                           FlatButton(
-                            textColor: Colors.lightGreen,
+                            textColor: Colors.lightBlue,
                             child: Text(
                               'Login',
-                              style: TextStyle(fontSize: 20),
+                              style: TextStyle(fontSize: 15),
                             ),
                             onPressed: () {
                               widget.toggleView();
