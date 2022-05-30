@@ -27,6 +27,9 @@ class DatabaseService {
         name: snapshot.data['name'],
         emailid: snapshot.data['emailid'],
         profilePic: snapshot.data['profilePic'],
+        weight: 69,
+        height: 170,
+        dob: DateTime(2000, 04, 29),
     );
   }
 
@@ -46,3 +49,27 @@ class DatabaseService {
   }
 
 }
+
+// Future<void> updateUserData(String name, String emailid, String profilePic) async {
+//   return await accountCollection.document(uid).setData({
+//     'name': name,
+//     'emailid': emailid,
+//     'profilePic': profilePic,
+//     'dob': "29/04/2000",
+//     'weight': 69,
+//     'height': 170
+//   });
+// }
+//
+// // userData from snapshot
+// Info _userDataFromSnapshot(DocumentSnapshot snapshot) {
+//   return Info(
+//     uid: uid,
+//     name: snapshot.data['name'],
+//     emailid: snapshot.data['emailid'],
+//     profilePic: snapshot.data['profilePic'],
+//     weight: snapshot.data['weight'],
+//     height: snapshot.data['height'],
+//     dob: snapshot.data['dob'],
+//   );
+// }

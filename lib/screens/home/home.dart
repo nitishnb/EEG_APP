@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () => {
                   setState(() {
                     _selectedIndex = 2;
-                    _selectedBody = Profile();
+                    _selectedBody = ProfilePage();
                     _selectedBodyTitle = "Profile";
                   }),
                   Navigator.of(context).pop(),
