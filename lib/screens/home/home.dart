@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:stress_detection_app/models/user.dart';
 import 'package:stress_detection_app/screens/Profile/profile.dart';
 import 'package:stress_detection_app/screens/analysis/LineChart.dart';
+import 'package:stress_detection_app/screens/model/tensorflow.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:stress_detection_app/services/database.dart';
 import 'package:stress_detection_app/shared/loading.dart';
@@ -155,6 +156,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ListTile(
+                selected: _selectedIndex == 11,
+                leading: Icon(Icons.account_tree_outlined),
+                title: Text('Model'),
+                onTap: () => {
+                  setState(() {
+                    _selectedIndex = 11;
+                    _selectedBody = Tensorflow();
+                    _selectedBodyTitle = "Model";
+                  }),
+                  Navigator.of(context).pop(),
+                },
+              ),
+              ListTile(
                 selected: _selectedIndex == 1,
                 leading: Icon(Icons.analytics_outlined),
                 title: Text('Analysis'),
@@ -244,8 +258,33 @@ class _MyHomePageState extends State<MyHomePage> {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text("Welcome"),
+    // return Center(
+    //     child: ListView(
+    //   children: [
+    //     Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBiPLE7vOONd4E01ji8EGrDQ8kfIL3HtpNGles7UAjb2YptUXFaI6W7MMZ2XT0E2pg8TQ&usqp=CAU',width: 350, height: 350),
+    //     Container(child: Text("Be Kind to you MIND !\n\n\n",style: TextStyle(color: Colors.blue,fontSize: 18,fontWeight: FontWeight.bold), )),
+    //   ]
+    // )
+    // );
+
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: <Widget>[
+                  Image.network('https://img.freepik.com/free-vector/welcome-back-typography-design_1308-88396.jpg',width: 150, height: 150),
+                  Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBiPLE7vOONd4E01ji8EGrDQ8kfIL3HtpNGles7UAjb2YptUXFaI6W7MMZ2XT0E2pg8TQ&usqp=CAU',width: 200, height: 200),
+                  Image.network('https://st3.depositphotos.com/6854928/34562/v/380/depositphotos_345623602-stock-illustration-be-kind-to-your-mind.jpg?forcejpeg=true',width: 350, height: 350),
+                  ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
