@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:stress_detection_app/charts/chart.dart';
 import 'package:stress_detection_app/models/linerseries.dart';
+import 'package:stress_detection_app/screens/analysis/OpenReport.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_pdf/pdf.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'OpenReport.dart';
 
 // ignore: must_be_immutable
 class LineChart extends StatelessWidget {
@@ -45,11 +48,19 @@ class LineChart extends StatelessWidget {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return SafeArea(
-      child: Center(
-          child: DeveloperChart(
-            data: data,
+    return Scaffold(
+      body: Center(
+        child: Row(
+          children: <Widget> [
+            ElevatedButton(
+            child: Text('Generate Report'),
+            onPressed: createReport
           ),
+          DeveloperChart(
+            data: data,
+          )
+          ] 
+        )
         // child: Container(
         //   // Center is a layout widget. It takes a single child and positions it
         //   // in the middle of the parent.
@@ -88,6 +99,17 @@ class LineChart extends StatelessWidget {
         // ),
       ),
     );
+  }
+
+  Future<void> createReport() async {
+
+    PdfDocument document =  PdfDocument();
+    document.pages.add();
+
+    List<int> bytes = document.save();
+    document.dispose();
+
+    saveLaunchFiles(bytes, 'Report.pdf'); 
   }
 }
 
