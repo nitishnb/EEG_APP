@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stress_detection_app/models/user.dart';
 import 'package:stress_detection_app/screens/Profile/profile.dart';
 import 'package:stress_detection_app/screens/analysis/LineChart.dart';
+import 'package:stress_detection_app/screens/model/tensorflow.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:stress_detection_app/services/database.dart';
 import 'package:stress_detection_app/shared/loading.dart';
@@ -155,6 +159,19 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               ListTile(
+                selected: _selectedIndex == 11,
+                leading: Icon(Icons.account_tree_outlined),
+                title: Text('Model'),
+                onTap: () => {
+                  setState(() {
+                    _selectedIndex = 11;
+                    _selectedBody = Tensorflow();
+                    _selectedBodyTitle = "Model";
+                  }),
+                  Navigator.of(context).pop(),
+                },
+              ),
+              ListTile(
                 selected: _selectedIndex == 1,
                 leading: Icon(Icons.analytics_outlined),
                 title: Text('Analysis'),
@@ -187,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () => {
                   setState(() {
                     _selectedIndex = 3;
-                    _selectedBody = Home();
+                    _selectedBody = HomePage();
                     _selectedBodyTitle = "Share";
                   }),
                   Navigator.of(context).pop(),
@@ -244,8 +261,38 @@ class _MyHomePageState extends State<MyHomePage> {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Center(
       child: Text("Hi"),
+=======
+    // return Center(
+    //     child: ListView(
+    //   children: [
+    //     Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBiPLE7vOONd4E01ji8EGrDQ8kfIL3HtpNGles7UAjb2YptUXFaI6W7MMZ2XT0E2pg8TQ&usqp=CAU',width: 350, height: 350),
+    //     Container(child: Text("Be Kind to you MIND !\n\n\n",style: TextStyle(color: Colors.blue,fontSize: 18,fontWeight: FontWeight.bold), )),
+    //   ]
+    // )
+    // );
+
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: Column(
+          children: <Widget>[
+            Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                children: <Widget>[
+                  SizedBox(height: 140,),
+                  Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBiPLE7vOONd4E01ji8EGrDQ8kfIL3HtpNGles7UAjb2YptUXFaI6W7MMZ2XT0E2pg8TQ&usqp=CAU',width: 200, height: 200),
+                  Image.network('https://st3.depositphotos.com/6854928/34562/v/380/depositphotos_345623602-stock-illustration-be-kind-to-your-mind.jpg?forcejpeg=true',width: 350, height: 350),
+                  ],
+              ),
+            ),
+          ],
+        ),
+      ),
+>>>>>>> feature-nitish
     );
   }
 }
@@ -260,6 +307,66 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Container(
       child: Text("Settings"),
+    );
+  }
+}
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<dynamic> _items = [[]];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/FirstData.json');
+    final data = await json.decode(response);
+    print(data);
+    setState(() {
+      _items = data;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Kindacode.com',
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: const Text('Load Data'),
+              onPressed: readJson,
+            ),
+
+            // Display the data loaded from sample.json
+            _items.isNotEmpty
+                ? Expanded(
+              child: ListView.builder(
+                itemCount: _items.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: ListTile(
+                      leading: Text(_items.toString()),
+                    ),
+                  );
+                },
+              ),
+            )
+                : Container()
+          ],
+        ),
+      ),
     );
   }
 }

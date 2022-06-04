@@ -49,7 +49,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(height: 24),
                         Center(child: buildUpgradeButton()),
                         const SizedBox(height: 102),
-                        Image.network('https://api.parashospitals.com/uploads/2017/10/BMI.png'),
+                        Image.network('https://api.parashospitals.com/uploads/2017/10/BMI.png',width: 180, height: 180),
                         // buildAbout(user),
                       ],
                     );
