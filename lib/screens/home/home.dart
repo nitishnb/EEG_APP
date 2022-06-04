@@ -261,10 +261,6 @@ class _MyHomePageState extends State<MyHomePage> {
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return Center(
-      child: Text("Hi"),
-=======
     // return Center(
     //     child: ListView(
     //   children: [
@@ -292,7 +288,6 @@ class Home extends StatelessWidget {
           ],
         ),
       ),
->>>>>>> feature-nitish
     );
   }
 }

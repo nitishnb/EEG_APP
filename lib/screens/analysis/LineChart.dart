@@ -50,15 +50,17 @@ class LineChart extends StatelessWidget {
     // than having to individually change instances of widgets.
     return Scaffold(
       body: Center(
-        child: Row(
+        child: Column(
           children: <Widget> [
-            ElevatedButton(
-            child: Text('Generate Report'),
-            onPressed: createReport
-          ),
+            SizedBox(height: 100,),
           DeveloperChart(
             data: data,
-          )
+          ),
+
+            ElevatedButton(
+                child: Text('Generate Report'),
+                onPressed: createReport
+            ),
           ] 
         )
         // child: Container(
