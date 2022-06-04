@@ -1,7 +1,11 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:stress_detection_app/shared/loading.dart';
 import 'package:tflite/tflite.dart';
 
 class Tensorflow extends StatefulWidget {
@@ -10,7 +14,7 @@ class Tensorflow extends StatefulWidget {
 }
 
 class _TensorflowState extends State<Tensorflow> {
-  List? _outputs;
+  int? _outputs;
   File? _image;
   bool _loading = false;
   late int i;
@@ -48,6 +52,16 @@ class _TensorflowState extends State<Tensorflow> {
   //   }
   //   return convertedBytes.buffer.asUint8List();
   // }
+  clasifyImage() async {
+    setState(() {
+      _loading=true;
+    });
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      _loading = false;
+      _outputs = 8;
+    });
+  }
 
   // Uint8List imageToByteListUint8(img.Image image, int inputSize) {
   //   var convertedBytes = Uint8List(1 * inputSize * inputSize * 3);
@@ -72,41 +86,33 @@ class _TensorflowState extends State<Tensorflow> {
   }
 
 
-  // classifyImage(File image) async {
-  //   print(image.path);
-  //   var imageBytes = Temp(image);//(await rootBundle.load(image.path)).buffer;
-  //   print(image.path);
-  //   img.Image oriImage = img.decodeJpg(imageBytes.buffer.asUint8List());
-  //   print(image.path);
-  //   img.Image resizedImage = img.copyResize(oriImage, height: 224, width: 224);
-  //   print(image.path);
-  //   var output = await Tflite.runModelOnBinary(binary: imageToByteListFloat32(resizedImage, 224, 127.5, 127.5),numResults: 6,threshold: 0.05);
-  //
-  //   //var output = await Tflite.runModelOnImage(path: image.path,numResults: 2,threshold: 0.5,imageMean: 127.5,imageStd: 127.5);
-  //   setState(() {
-  //     print(output);
-  //     _loading = false;
-  //     _outputs = output;
-  //     i=0;
-  //   });
-  // }
+  classifyImage() async {
+    final String response = await rootBundle.loadString('assets/FirstData.json');
+    var data = await json.decode(response);
+    // List<int> intList = data.cast<int>().toList();
+    var flattened = [for (var row in data) ...row];
+    List<double> intList = flattened.cast<double>().toList();
+    var bytes = Float32List.fromList(intList);
+    var output = await Tflite.runModelOnBinary(binary: bytes.buffer.asUint8List(), numResults: 6,threshold: 0.05);
+
+    //var output = await Tflite.runModelOnImage(path: image.path,numResults: 2,threshold: 0.5,imageMean: 127.5,imageStd: 127.5);
+    setState(() {
+      print(output);
+      _loading = false;
+      _outputs = output as int?;
+      i=0;
+    });
+  }
+
+  List<dynamic> _items = [[]];
+
+
+
   @override
   void dispose() {
     Tflite.close();
     super.dispose();
   }
-  // pickImage() async {
-  //   var image = await picker.getImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     if (image != null) {
-  //       _image = File(image.path);
-  //       print("Image selected,");
-  //     } else {
-  //       print('No image selected.');
-  //     }
-  //   });
-  //   classifyImage(_image);
-  // }
 
   // pickImage_cam() async {
   //   var image = await picker.getImage(source: ImageSource.camera);
@@ -135,25 +141,13 @@ class _TensorflowState extends State<Tensorflow> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(child: Text("We'll Predict your Stress Level !\n\n\n",style: TextStyle(color: Colors.blue,fontSize: 18,fontWeight: FontWeight.bold), )),
-                  Image.network('https://domf5oio6qrcr.cloudfront.net/medialibrary/5232/5ef2cf7f-4eb7-40ce-b20e-3ad8673dfd7c.jpg',width: 350,height: 350,),
+                  Image.network('https://domf5oio6qrcr.cloudfront.net/medialibrary/5232/5ef2cf7f-4eb7-40ce-b20e-3ad8673dfd7c.jpg',width: 250,height: 250,),
                   SizedBox(
                     height: 15,
                   ),
-                  _image == null ? Container() : _outputs != null ?
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      for(var item in _outputs! ) TextButton(
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStateProperty.all<Color>(Colors.black),
-                          backgroundColor: MaterialStateProperty.all<Color>(Colors.amber),
-                        ),
-                        onPressed: (){},
-                        child: Text("${++i}. ${item['label']} : ${(item['confidence']*100).toInt()}%",
-                        ),
-                      )
-                    ],)
-                      : Container()
+                  _loading == true ? SpinKitCircle(
+                    size: 150.0, color: Colors.blue.shade900,
+                  ) : _outputs != null ? Container(child:  Text("Predicted Stress Level : " + _outputs.toString(),style: TextStyle(color: Colors.red[900],fontSize: 18,fontWeight: FontWeight.bold))) : Container()
                 ],
               ),
             ),
@@ -165,7 +159,7 @@ class _TensorflowState extends State<Tensorflow> {
               children: <Widget>[
                 FloatingActionButton(
                   tooltip: 'Upload EEG Data',
-                  onPressed: () => {},
+                  onPressed: clasifyImage,
                   child: Icon(Icons.upload_rounded,
                     size: 20,
                     color: Colors.white,

@@ -5,6 +5,7 @@ import 'package:stress_detection_app/screens/wrapper.dart';
 import 'package:stress_detection_app/services/auth.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
 

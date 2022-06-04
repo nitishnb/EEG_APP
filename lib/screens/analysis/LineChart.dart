@@ -14,28 +14,28 @@ class LineChart extends StatelessWidget {
     final List<DeveloperSeries> data = [
 
       DeveloperSeries(
-        year: new DateTime(2021, 5, 10),
+        year: new DateTime(2021, 5, 31),
         level: 9,
         barColor: charts.ColorUtil.fromDartColor(Colors.green),
       ),
       DeveloperSeries(
-        year: new DateTime(2021, 5, 11),
+        year: new DateTime(2021, 6, 1),
         level: 8,
         barColor: charts.ColorUtil.fromDartColor(Colors.green),
       ),
       DeveloperSeries(
-        year: new DateTime(2021, 5, 12),
+        year: new DateTime(2021, 6, 2),
         level: 6,
         barColor: charts.ColorUtil.fromDartColor(Colors.green),
       ),
       DeveloperSeries(
-        year: new DateTime(2021, 5, 13),
+        year: new DateTime(2021, 6, 3),
         level: 7,
         barColor: charts.ColorUtil.fromDartColor(Colors.green),
       ),
       DeveloperSeries(
-        year: new DateTime(2021, 5, 14),
-        level: 5,
+        year: new DateTime(2021, 6, 4),
+        level: 8,
         barColor: charts.ColorUtil.fromDartColor(Colors.green),
       ),
     ];

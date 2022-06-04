@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:stress_detection_app/models/user.dart';
 import 'package:stress_detection_app/screens/Profile/profile.dart';
@@ -201,7 +204,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onTap: () => {
                   setState(() {
                     _selectedIndex = 3;
-                    _selectedBody = Home();
+                    _selectedBody = HomePage();
                     _selectedBodyTitle = "Share";
                   }),
                   Navigator.of(context).pop(),
@@ -276,7 +279,7 @@ class Home extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: Column(
                 children: <Widget>[
-                  Image.network('https://img.freepik.com/free-vector/welcome-back-typography-design_1308-88396.jpg',width: 150, height: 150),
+                  SizedBox(height: 140,),
                   Image.network('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBiPLE7vOONd4E01ji8EGrDQ8kfIL3HtpNGles7UAjb2YptUXFaI6W7MMZ2XT0E2pg8TQ&usqp=CAU',width: 200, height: 200),
                   Image.network('https://st3.depositphotos.com/6854928/34562/v/380/depositphotos_345623602-stock-illustration-be-kind-to-your-mind.jpg?forcejpeg=true',width: 350, height: 350),
                   ],
@@ -299,6 +302,66 @@ class _SettingsState extends State<Settings> {
   Widget build(BuildContext context) {
     return Container(
       child: Text("Settings"),
+    );
+  }
+}
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<dynamic> _items = [[]];
+
+  // Fetch content from the json file
+  Future<void> readJson() async {
+    final String response = await rootBundle.loadString('assets/FirstData.json');
+    final data = await json.decode(response);
+    print(data);
+    setState(() {
+      _items = data;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          'Kindacode.com',
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: const Text('Load Data'),
+              onPressed: readJson,
+            ),
+
+            // Display the data loaded from sample.json
+            _items.isNotEmpty
+                ? Expanded(
+              child: ListView.builder(
+                itemCount: _items.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    margin: const EdgeInsets.all(10),
+                    child: ListTile(
+                      leading: Text(_items.toString()),
+                    ),
+                  );
+                },
+              ),
+            )
+                : Container()
+          ],
+        ),
+      ),
     );
   }
 }
